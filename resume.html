@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bryan DeLeon — Resume</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:           #0f172a;
+      --navy-border:    rgba(148, 163, 184, 0.14);
+      --sidebar-text:   #e2e8f0;
+      --sidebar-muted:  #94a3b8;
+      --sidebar-accent: #a5b4fc;
+      --text:           #1e293b;
+      --muted:          #475569;
+      --light:          #94a3b8;
+      --border:         #e2e8f0;
+      --accent:         #4f46e5;
+    }
+
+    html { font-size: 14px; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #dce0e8;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── PAGE ──────────────────────────────────────── */
+    .page {
+      display: grid;
+      grid-template-columns: 228px 1fr;
+      max-width: 860px;
+      margin: 36px auto;
+      box-shadow: 0 16px 64px rgba(0,0,0,0.24);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    /* ── SIDEBAR ───────────────────────────────────── */
+    .sidebar {
+      background: var(--navy);
+      padding: 36px 24px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+      print-color-adjust: exact;
+      -webkit-print-color-adjust: exact;
+      color-adjust: exact;
+    }
+
+    /* Name block */
+    .sidebar-name {
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--navy-border);
+    }
+
+    .sidebar-name h1 {
+      font-family: 'Syne', system-ui, sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: -0.03em;
+      line-height: 1.05;
+    }
+
+    .sidebar-title {
+      font-size: 0.69rem;
+      font-weight: 600;
+      color: var(--sidebar-accent);
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    .aws-badge {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.59rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sidebar-accent);
+      border: 1px solid rgba(165,180,252,0.32);
+      border-radius: 20px;
+      padding: 2px 9px;
+      margin-top: 9px;
+    }
+
+    /* Sidebar section heading */
+    .sidebar-heading {
+      font-size: 0.61rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--sidebar-accent);
+      padding-bottom: 7px;
+      border-bottom: 1px solid var(--navy-border);
+      margin-bottom: 12px;
+    }
+
+    /* Contact */
+    .contact-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .contact-list li {
+      font-size: 0.77rem;
+      color: var(--sidebar-muted);
+      line-height: 1.4;
+      word-break: break-all;
+    }
+
+    .contact-list a {
+      color: var(--sidebar-muted);
+      text-decoration: none;
+    }
+
+    /* Skills */
+    .skill-block { margin-bottom: 11px; }
+    .skill-block:last-child { margin-bottom: 0; }
+
+    .skill-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--sidebar-text);
+      margin-bottom: 3px;
+    }
+
+    .skill-value {
+      font-size: 0.74rem;
+      color: var(--sidebar-muted);
+      line-height: 1.65;
+    }
+
+    /* Education */
+    .edu-block { margin-bottom: 15px; }
+    .edu-block:last-child { margin-bottom: 0; }
+
+    .edu-school {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--sidebar-text);
+      line-height: 1.3;
+    }
+
+    .edu-degree {
+      font-size: 0.74rem;
+      color: var(--sidebar-muted);
+      line-height: 1.55;
+      margin-top: 3px;
+    }
+
+    .edu-year {
+      font-size: 0.69rem;
+      color: rgba(148,163,184,0.5);
+      margin-top: 3px;
+    }
+
+    /* Certifications */
+    .cert-block { margin-bottom: 8px; }
+    .cert-block:last-child { margin-bottom: 0; }
+
+    .cert-name {
+      font-size: 0.73rem;
+      font-weight: 500;
+      color: var(--sidebar-text);
+      line-height: 1.3;
+    }
+
+    .cert-issuer {
+      font-size: 0.67rem;
+      color: rgba(148,163,184,0.5);
+      margin-top: 1px;
+    }
+
+    /* ── MAIN ──────────────────────────────────────── */
+    .main {
+      background: #ffffff;
+      padding: 36px 40px 52px;
+      border-top: 4px solid var(--accent);
+    }
+
+    .main-section { margin-bottom: 22px; }
+    .main-section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 13px;
+      padding-bottom: 7px;
+      border-bottom: 1.5px solid var(--border);
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1.5px;
+      width: 32px;
+      height: 1.5px;
+      background: var(--accent);
+    }
+
+    /* Summary */
+    .summary-text {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.72;
+    }
+
+    /* Jobs */
+    .job {
+      margin-bottom: 16px;
+      break-inside: avoid;
+    }
+
+    .job + .job {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+
+    .job:last-child { margin-bottom: 0; }
+
+    .job-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 5px;
+    }
+
+    .job-company {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .job-role {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-top: 2px;
+    }
+
+    .job-meta {
+      font-size: 0.71rem;
+      color: var(--light);
+      text-align: right;
+      white-space: nowrap;
+      line-height: 1.5;
+      flex-shrink: 0;
+    }
+
+    .job ul {
+      list-style: none;
+      margin-top: 5px;
+    }
+
+    .job ul li {
+      font-size: 0.83rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 2px;
+    }
+
+    .job ul li:last-child { margin-bottom: 0; }
+
+    .job ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.6rem;
+      top: 0.3em;
+    }
+
+    /* ── PRINT ─────────────────────────────────────── */
+    @media print {
+      body { background: white; }
+
+      .page {
+        margin: 0;
+        box-shadow: none;
+        max-width: 100%;
+        width: 100%;
+        border-radius: 0;
+      }
+
+      .sidebar {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+
+      .job { break-inside: avoid; }
+
+      @page {
+        margin: 0;
+        size: letter;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-name">
+      <h1>Bryan<br>DeLeon</h1>
+      <div class="sidebar-title">Senior Software Engineer</div>
+      <div class="aws-badge">AWS Certified</div>
+    </div>
+
+    <div>
+      <div class="sidebar-heading">Contact</div>
+      <ul class="contact-list">
+        <li>Denver, CO</li>
+        <li><a href="mailto:bdeleon@alum.mit.edu">bdeleon@alum.mit.edu</a></li>
+        <li><a href="https://linkedin.com/in/bdeleon">linkedin.com/in/bdeleon</a></li>
+        <li><a href="https://github.com/bdeleon">github.com/bdeleon</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="sidebar-heading">Skills</div>
+      <div class="skill-block">
+        <div class="skill-label">Languages</div>
+        <div class="skill-value">Python · Java · C# · SQL · R · Objective-C · Swift · MATLAB · Ruby</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-label">Frameworks &amp; Tools</div>
+        <div class="skill-value">Django · Flask · Docker · Kubernetes · Terraform · Chef · PySpark · Stripe · Avalara · Segment · Klaviyo</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-label">Cloud / AWS</div>
+        <div class="skill-value">ECS · Lambda · Redshift · CodePipeline · CloudFormation</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-label">Practices</div>
+        <div class="skill-value">REST APIs · TDD · CI/CD · Agile/Scrum · OOP</div>
+      </div>
+      <div class="skill-block">
+        <div class="skill-label">Human Languages</div>
+        <div class="skill-value">English (native) · Spanish (working)</div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-heading">Education</div>
+      <div class="edu-block">
+        <div class="edu-school">Massachusetts Institute of Technology</div>
+        <div class="edu-degree">B.S. Management Science<br>Finance &amp; Economics</div>
+        <div class="edu-year">2002 – 2006</div>
+      </div>
+      <div class="edu-block">
+        <div class="edu-school">University of Chicago</div>
+        <div class="edu-degree">M.S. Computer Science</div>
+        <div class="edu-year">2013 – 2015</div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <section class="main-section">
+      <h2 class="section-title">Summary</h2>
+      <p class="summary-text">
+        Software engineer with an M.S. in Computer Science (University of Chicago) and a B.S. from MIT.
+        12+ years of experience building backend systems, cloud infrastructure, and data pipelines. AWS certified.
+        Background in quantitative finance brings an uncommon perspective on building systems that have to
+        perform under pressure. Strong advocate for clean code, high test coverage, and reliable deployments.
+      </p>
+    </section>
+
+    <section class="main-section">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Sunday</div>
+            <div class="job-role">Senior Back-end Engineer</div>
+          </div>
+          <div class="job-meta">Nov 2022 – Present<br>Boulder, CO / Remote</div>
+        </div>
+        <ul>
+          <li>Owned a large-scale architectural refactor to decouple the core cart system, reducing technical debt and preserving critical business logic with minimal oversight.</li>
+          <li>Designed and built a store credit service integrated across purchase order confirmation, subscription reauthorization, and tax recalculation.</li>
+          <li>Redesigned the Stripe integration for improved scalability, adding Apple Pay and Google Pay support.</li>
+          <li>Built proactive health monitoring alerts for out-of-stock inventory, overdue subscriptions, and cart anomalies — surfacing issues before they reached production.</li>
+          <li>Maintained and extended integrations with Avalara (tax), Klaviyo (email), Segment (analytics), and UPS (shipping).</li>
+          <li>Managed recurring Django LTS upgrades, keeping the platform current with each new long-term support release.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Wayspring</div>
+            <div class="job-role">Senior Software Engineer</div>
+          </div>
+          <div class="job-meta">Mar 2018 – Nov 2022<br>Nashville, TN / Remote</div>
+        </div>
+        <ul>
+          <li>Architected and maintained end-to-end CI/CD pipelines across development, staging, and production using AWS CodePipeline, CloudFormation, and ECS.</li>
+          <li>Designed and delivered multiple production-grade REST APIs using Django REST Framework, sustaining 90%+ test coverage across all repositories.</li>
+          <li>Introduced an event-driven architecture via AWS Lambda, decoupling core services and improving overall system resilience.</li>
+          <li>Built a proof-of-concept EHR integration delivering patient risk data into a provider's system on appointment creation.</li>
+          <li>Collaborated cross-functionally to ship an MVP care management platform in six weeks, meeting a hard deadline to support a new line of business pilot.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">HealthStream</div>
+            <div class="job-role">Data Solutions Developer</div>
+          </div>
+          <div class="job-meta">Mar 2016 – Mar 2018<br>Nashville, TN</div>
+        </div>
+        <ul>
+          <li>Designed and delivered a scalable data reporting platform on Amazon Redshift, supporting business intelligence needs across the organization.</li>
+          <li>Engineered ETL pipelines to migrate data from MSSQL to Redshift and tuned query performance against tables containing tens of millions of records.</li>
+          <li>Provisioned and maintained cloud and on-premises infrastructure using Terraform and Chef.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Authentify</div>
+            <div class="job-role">Software Engineer</div>
+          </div>
+          <div class="job-meta">Jan 2014 – Mar 2016<br>Chicago, IL / Nashville, TN</div>
+        </div>
+        <ul>
+          <li>Developed multi-language SDKs and reference applications (mobile and web) to accelerate developer adoption of the company's out-of-band authentication platform.</li>
+          <li>Built an iOS application featuring biometric authentication — voice and fingerprint verification — using Objective-C.</li>
+          <li>Deployed and maintained RESTful services on AWS EC2 using Python/Flask and Java/Jersey frameworks.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Gelber Group</div>
+            <div class="job-role">Trader / Financial Engineer</div>
+          </div>
+          <div class="job-meta">Jul 2009 – Jan 2014<br>Chicago, IL</div>
+        </div>
+        <ul>
+          <li>Researched, developed, and automated a futures pricing model that traded live across multiple products and exchanges — from concept through to production deployment.</li>
+          <li>Built a suite of C# trading tools that ingested live market data and surfaced actionable signals for daily decision-making.</li>
+          <li>Developed MATLAB backtesting applications to rigorously evaluate and stress-test pricing models before going live.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Hard 8 Trading</div>
+            <div class="job-role">Trader</div>
+          </div>
+          <div class="job-meta">Jan 2008 – May 2009<br>Chicago, IL</div>
+        </div>
+        <ul>
+          <li>Traded and managed option positions; conducted daily analysis of portfolio performance and risk.</li>
+          <li>Developed MATLAB scripts to backtest and assess model viability.</li>
+        </ul>
+      </div>
+
+      <div class="job">
+        <div class="job-header">
+          <div>
+            <div class="job-company">Susquehanna International Group</div>
+            <div class="job-role">Assistant Trader</div>
+          </div>
+          <div class="job-meta">Jul 2006 – Dec 2007<br>Chicago, IL (CBOE)</div>
+        </div>
+        <ul>
+          <li>Supported three veteran traders, including the head of the Chicago office, in one of the largest equity option pits on the CBOE.</li>
+          <li>Wrote VBA macros tracking live position data and automated Excel tasks for trading data.</li>
+        </ul>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+</body>
+</html>

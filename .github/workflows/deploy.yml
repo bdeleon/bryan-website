@@ -1,0 +1,77 @@
+name: Deploy to AWS
+
+on:
+  push:
+    branches:
+      - main
+
+# id-token: write is required for GitHub Actions OIDC token exchange.
+# Without it, aws-actions/configure-aws-credentials cannot request a
+# JWT from GitHub's OIDC endpoint and the role assumption will fail.
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    name: Sync to S3 and invalidate CloudFront
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: us-east-1
+
+      # Sync all website files. --delete removes S3 objects that no
+      # longer exist locally. Excludes non-website directories.
+      - name: Sync files to S3
+        run: |
+          aws s3 sync . "s3://${{ secrets.S3_BUCKET }}/" \
+            --delete \
+            --exclude ".git/*" \
+            --exclude ".github/*" \
+            --exclude "infrastructure/*"
+
+      # Re-upload HTML files with no-cache headers so visitors always
+      # get the latest version without waiting for CDN TTL to expire.
+      - name: Set cache headers on HTML files
+        run: |
+          for file in index.html resume.html; do
+            aws s3 cp \
+              "s3://${{ secrets.S3_BUCKET }}/$file" \
+              "s3://${{ secrets.S3_BUCKET }}/$file" \
+              --metadata-directive REPLACE \
+              --content-type "text/html; charset=utf-8" \
+              --cache-control "public, max-age=0, must-revalidate"
+          done
+
+      # CSS and JS can be cached for a day since CloudFront invalidation
+      # runs on every deploy anyway.
+      - name: Set cache headers on CSS and JS files
+        run: |
+          aws s3 cp \
+            "s3://${{ secrets.S3_BUCKET }}/style.css" \
+            "s3://${{ secrets.S3_BUCKET }}/style.css" \
+            --metadata-directive REPLACE \
+            --content-type "text/css" \
+            --cache-control "public, max-age=86400, stale-while-revalidate=3600"
+
+          aws s3 cp \
+            "s3://${{ secrets.S3_BUCKET }}/script.js" \
+            "s3://${{ secrets.S3_BUCKET }}/script.js" \
+            --metadata-directive REPLACE \
+            --content-type "application/javascript" \
+            --cache-control "public, max-age=86400, stale-while-revalidate=3600"
+
+      # Invalidate everything so visitors see changes immediately,
+      # regardless of CloudFront's cached TTL for each object.
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id "${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }}" \
+            --paths "/*"
