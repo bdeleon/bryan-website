@@ -6,49 +6,49 @@
   <title>Bryan DeLeon — Resume</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@600&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --navy:           #0f172a;
-      --navy-border:    rgba(148, 163, 184, 0.14);
-      --sidebar-text:   #e2e8f0;
-      --sidebar-muted:  #94a3b8;
-      --sidebar-accent: #a5b4fc;
-      --text:           #1e293b;
-      --muted:          #475569;
-      --light:          #94a3b8;
-      --border:         #e2e8f0;
-      --accent:         #4f46e5;
+      --sidebar-bg:     #2c2c28;
+      --sidebar-border: rgba(184, 149, 106, 0.16);
+      --sidebar-text:   #f5f3f0;
+      --sidebar-muted:  #b8956a;
+      --sidebar-accent: #c9a961;
+      --text:           #2c2c28;
+      --muted:          #6b6b64;
+      --light:          #a8a8a0;
+      --border:         #e8e4dc;
+      --accent:         #a0523d;
     }
 
     html { font-size: 14px; }
 
     body {
-      font-family: 'Inter', system-ui, sans-serif;
-      background: #dce0e8;
+      font-family: 'Source Sans 3', system-ui, sans-serif;
+      background: #faf8f3;
       -webkit-font-smoothing: antialiased;
     }
 
     /* ── PAGE ──────────────────────────────────────── */
     .page {
       display: grid;
-      grid-template-columns: 228px 1fr;
-      max-width: 860px;
-      margin: 36px auto;
-      box-shadow: 0 16px 64px rgba(0,0,0,0.24);
-      border-radius: 3px;
+      grid-template-columns: 240px 1fr;
+      max-width: 900px;
+      margin: 40px auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+      border-radius: 4px;
       overflow: hidden;
     }
 
     /* ── SIDEBAR ───────────────────────────────────── */
     .sidebar {
-      background: var(--navy);
-      padding: 36px 24px 44px;
+      background: var(--sidebar-bg);
+      padding: 40px 28px 48px;
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 28px;
       print-color-adjust: exact;
       -webkit-print-color-adjust: exact;
       color-adjust: exact;
@@ -56,16 +56,16 @@
 
     /* Name block */
     .sidebar-name {
-      padding-bottom: 20px;
-      border-bottom: 1px solid var(--navy-border);
+      padding-bottom: 22px;
+      border-bottom: 1px solid var(--sidebar-border);
     }
 
     .sidebar-name h1 {
-      font-family: 'Syne', system-ui, sans-serif;
-      font-size: 2.2rem;
-      font-weight: 800;
+      font-family: 'Crimson Text', Georgia, serif;
+      font-size: 2.4rem;
+      font-weight: 600;
       color: #fff;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.02em;
       line-height: 1.05;
     }
 
@@ -185,8 +185,8 @@
     /* ── MAIN ──────────────────────────────────────── */
     .main {
       background: #ffffff;
-      padding: 36px 40px 52px;
-      border-top: 4px solid var(--accent);
+      padding: 40px 44px 56px;
+      border-top: 3px solid var(--accent);
     }
 
     .main-section { margin-bottom: 22px; }
