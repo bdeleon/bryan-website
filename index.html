@@ -711,6 +711,53 @@
     </div>
   </footer>
 
+  <!-- ─── TRADING PIT EASTER EGG ─────────────────────────────── -->
+  <div id="trading-pit-modal" class="trading-pit-hidden">
+    <div class="trading-pit-overlay"></div>
+    <div class="trading-pit-container">
+      <div class="trading-pit-header">
+        <h2>TRADING PIT</h2>
+        <button class="trading-pit-close" aria-label="Close game">&times;</button>
+      </div>
+
+      <div class="trading-pit-game">
+        <div class="trading-pit-top">
+          <div class="trading-pit-stats">
+            <div class="stat">
+              <span class="label">Cash</span>
+              <span class="value" id="pit-cash">$10,000</span>
+            </div>
+            <div class="stat">
+              <span class="label">Portfolio</span>
+              <span class="value" id="pit-portfolio">$0</span>
+            </div>
+            <div class="stat">
+              <span class="label">Total</span>
+              <span class="value" id="pit-total">$10,000</span>
+            </div>
+          </div>
+          <div class="trading-pit-timer">
+            <span id="pit-timer">90</span>s
+          </div>
+        </div>
+
+        <div class="trading-pit-stocks" id="pit-stocks"></div>
+
+        <div class="trading-pit-news" id="pit-news"></div>
+
+        <div id="pit-game-over" class="trading-pit-game-over trading-pit-hidden">
+          <h3>GAME OVER</h3>
+          <div class="final-score">
+            <span class="label">Final Score</span>
+            <span class="value" id="pit-final-score">$10,000</span>
+          </div>
+          <button id="pit-play-again" class="btn btn-primary">Play Again</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
   <script src="script.js"></script>
 </body>
 
