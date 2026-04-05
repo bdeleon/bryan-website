@@ -111,6 +111,33 @@ Resources:
         SigningBehavior: always
         SigningProtocol: sigv4
 
+  # ── CloudFront Response Headers Policy ──────────────────────────
+  SecurityHeadersPolicy:
+    Type: AWS::CloudFront::ResponseHeadersPolicy
+    Properties:
+      ResponseHeadersPolicyConfig:
+        Name: !Sub "${DomainName}-security-headers"
+        SecurityHeadersConfig:
+          ContentTypeOptions:
+            Override: true
+          FrameOptions:
+            FrameOption: DENY
+            Override: true
+          ReferrerPolicy:
+            ReferrerPolicy: strict-origin-when-cross-origin
+            Override: true
+          StrictTransportSecurity:
+            AccessControlMaxAgeSec: 31536000
+            IncludeSubdomains: true
+            Override: true
+          XSSProtection:
+            ModeBlock: true
+            Override: true
+            Protection: true
+          ContentSecurityPolicy:
+            ContentSecurityPolicy: "default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none'"
+            Override: true
+
   # ── CloudFront Distribution ──────────────────────────────────────
   # ~15-20 min to propagate globally on first create.
   Distribution:
@@ -144,6 +171,7 @@ Resources:
           Compress: true
           # AWS managed CachingOptimized policy
           CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          ResponseHeadersPolicyId: !Ref SecurityHeadersPolicy
 
         # S3 private bucket returns 403 for missing keys (not 404).
         # Convert both to a 404 served from index.html.
