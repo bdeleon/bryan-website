@@ -116,7 +116,7 @@ Resources:
     Type: AWS::CloudFront::ResponseHeadersPolicy
     Properties:
       ResponseHeadersPolicyConfig:
-        Name: !Sub "${DomainName}-security-headers"
+        Name: bryandeleon-com-security-headers
         SecurityHeadersConfig:
           ContentTypeOptions:
             Override: true
