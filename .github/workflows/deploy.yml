@@ -19,23 +19,33 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Configure AWS credentials (OIDC)
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@v5
         with:
           role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
           aws-region: us-east-1
 
       # Sync all website files. --delete removes S3 objects that no
-      # longer exist locally. Excludes non-website directories.
+      # longer exist locally. Excludes everything in the repo that is not
+      # part of the site: tooling, infrastructure, agent skills, docs, and
+      # macOS metadata. Without these, /.claude/skills/…, /README.md and
+      # /.DS_Store were all publicly served. Note that sync never deletes
+      # an excluded path, so copies published before these excludes were
+      # added stay in the bucket until removed by hand.
       - name: Sync files to S3
         run: |
           aws s3 sync . "s3://${{ secrets.S3_BUCKET }}/" \
             --delete \
             --exclude ".git/*" \
             --exclude ".github/*" \
-            --exclude "infrastructure/*"
+            --exclude "infrastructure/*" \
+            --exclude ".claude/*" \
+            --exclude ".agents/*" \
+            --exclude "*.md" \
+            --exclude "*.DS_Store" \
+            --exclude "skills-lock.json"
 
       # Re-upload HTML files with no-cache headers so visitors always
       # get the latest version without waiting for CDN TTL to expire.
@@ -54,12 +64,14 @@ jobs:
       # runs on every deploy anyway.
       - name: Set cache headers on CSS and JS files
         run: |
-          aws s3 cp \
-            "s3://${{ secrets.S3_BUCKET }}/style.css" \
-            "s3://${{ secrets.S3_BUCKET }}/style.css" \
-            --metadata-directive REPLACE \
-            --content-type "text/css" \
-            --cache-control "public, max-age=86400, stale-while-revalidate=3600"
+          for file in style.css resume.css; do
+            aws s3 cp \
+              "s3://${{ secrets.S3_BUCKET }}/$file" \
+              "s3://${{ secrets.S3_BUCKET }}/$file" \
+              --metadata-directive REPLACE \
+              --content-type "text/css" \
+              --cache-control "public, max-age=86400, stale-while-revalidate=3600"
+          done
 
           aws s3 cp \
             "s3://${{ secrets.S3_BUCKET }}/script.js" \
