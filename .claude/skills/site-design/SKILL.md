@@ -49,9 +49,10 @@ Hand-written files, no build step, no framework:
 
 Use tokens; don't add raw hex values or a new accent.
 
-**Known issue:** `--text-muted` is currently used as a text color in ~10
-places (`grep -n "color: var(--text-muted)" style.css`). Don't add more; when
-touching those rules, move them to `--text-secondary`.
+`--text-muted` is only for decorative glyphs (list bullets, the hero "·"
+divider). All readable text uses `--text-secondary` or darker; the same rule
+applies in `resume.css` (`--light` is decorative, `--muted` is the floor;
+the dark sidebar's dim text is `rgba(245, 243, 240, 0.55)`, 4.9:1).
 
 ## Typography
 
@@ -78,9 +79,15 @@ touching those rules, move them to `--text-secondary`.
 
 ## Rules
 
-- **Reduced motion is not handled yet** (no `prefers-reduced-motion` in
-  `style.css` or `script.js`). Anything new that moves must respect it; ideally
-  add a global rule that disables `.fade-in` transitions and the counters.
+- **Reduced motion:** a `prefers-reduced-motion` block at the end of
+  `style.css` neutralises all animations/transitions and shows `.fade-in`
+  content immediately; `animateCounter` in `script.js` jumps to the final
+  value. Anything new that moves is covered by the global rule — don't
+  override it with `!important`.
+- **SVG colours go in CSS, not markup.** The hero diagram's colours and
+  animation delays are classes in `style.css` (`.node-grad-*`,
+  `.diagram-lines`, `.node-delay-*`) so they use tokens and survive the CSP,
+  which blocks `style=""` attributes.
 - Breakpoints in use: 1024px, 768px, 480px (max-width, desktop-first). Check
   at 1440, 768 and 390 wide; no horizontal scroll.
 - `resume.html` is also a print document — check print preview after

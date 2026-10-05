@@ -315,6 +315,18 @@ h1, h2, h3 {
   animation: node-float 6s ease-in-out infinite;
 }
 
+/* Diagram colours and timing live here rather than in the SVG markup: the
+   site's Content-Security-Policy refuses style="" attributes (which left the
+   gradient falling back to black), and CSS can use the palette tokens. */
+.node-grad-start { stop-color: var(--accent-warm); stop-opacity: 0.3; }
+.node-grad-end   { stop-color: var(--accent-warm); stop-opacity: 0.1; }
+.diagram-lines,
+.node-animate    { stroke: var(--accent-warm); }
+.node-pulse      { stroke: var(--accent-gold); }
+.node-delay-1s   { animation-delay: 1s; }
+.node-delay-1-5s { animation-delay: 1.5s; }
+.node-delay-2s   { animation-delay: 2s; }
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -471,7 +483,7 @@ h1, h2, h3 {
 .stat-label {
   font-size: 0.8rem;
   font-family: var(--font-mono);
-  color: var(--text-muted);
+  color: var(--text-secondary);
   letter-spacing: 0.04em;
   line-height: 1.5;
 }
@@ -661,7 +673,7 @@ h1, h2, h3 {
 
 .timeline-location {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   font-family: var(--font-mono);
   white-space: nowrap;
 }
@@ -855,7 +867,7 @@ h1, h2, h3 {
 .resume-job-date {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
@@ -955,7 +967,7 @@ h1, h2, h3 {
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: var(--text-secondary);
 }
 
 .contact-link-value {
@@ -981,7 +993,7 @@ footer {
 footer p {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   letter-spacing: 0.06em;
   max-width: 1120px;
   margin: 0 auto;
@@ -1080,7 +1092,7 @@ footer p {
 .resume-cert-issuer {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   letter-spacing: 0.02em;
 }
 
@@ -1255,4 +1267,24 @@ footer p {
   .section-title {
     margin-bottom: 40px;
   }
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   REDUCED MOTION — for visitors who ask their OS for less motion:
+   no scroll fade-ins, floating/pulsing diagram nodes, hero entrance,
+   hover lifts, or smooth scrolling. (script.js skips the counters.)
+───────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0s !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .fade-in { opacity: 1; transform: none; }
+  .btn:hover { transform: none; }
 }

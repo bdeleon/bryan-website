@@ -88,8 +88,8 @@
       <svg class="system-diagram" viewBox="0 0 800 800" preserveAspectRatio="xMidYMid slice">
         <defs>
           <linearGradient id="node-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:0.3" />
-            <stop offset="100%" style="stop-color:#6366f1;stop-opacity:0.1" />
+            <stop offset="0%" class="node-grad-start" />
+            <stop offset="100%" class="node-grad-end" />
           </linearGradient>
           <filter id="node-glow">
             <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
@@ -99,7 +99,7 @@
             </feMerge>
           </filter>
         </defs>
-        <g opacity="0.15" stroke="#4f46e5" stroke-width="0.8" fill="none">
+        <g class="diagram-lines" opacity="0.15" stroke-width="0.8" fill="none">
           <line x1="150" y1="150" x2="650" y2="150" />
           <line x1="150" y1="150" x2="150" y2="650" />
           <line x1="650" y1="150" x2="650" y2="650" />
@@ -108,11 +108,11 @@
           <line x1="650" y1="150" x2="150" y2="650" />
           <circle cx="400" cy="400" r="200" />
         </g>
-        <circle cx="200" cy="200" r="12" fill="url(#node-grad)" stroke="#6366f1" stroke-width="1.5" filter="url(#node-glow)" class="node-animate" />
-        <circle cx="600" cy="200" r="12" fill="url(#node-grad)" stroke="#6366f1" stroke-width="1.5" filter="url(#node-glow)" class="node-animate" style="animation-delay: 1s;" />
-        <circle cx="200" cy="600" r="12" fill="url(#node-grad)" stroke="#6366f1" stroke-width="1.5" filter="url(#node-glow)" class="node-animate" style="animation-delay: 2s;" />
-        <circle cx="600" cy="600" r="12" fill="url(#node-grad)" stroke="#6366f1" stroke-width="1.5" filter="url(#node-glow)" class="node-animate" style="animation-delay: 1.5s;" />
-        <circle cx="400" cy="400" r="16" fill="url(#node-grad)" stroke="#818cf8" stroke-width="2" filter="url(#node-glow)" class="node-pulse" />
+        <circle cx="200" cy="200" r="12" fill="url(#node-grad)" stroke-width="1.5" filter="url(#node-glow)" class="node-animate" />
+        <circle cx="600" cy="200" r="12" fill="url(#node-grad)" stroke-width="1.5" filter="url(#node-glow)" class="node-animate node-delay-1s" />
+        <circle cx="200" cy="600" r="12" fill="url(#node-grad)" stroke-width="1.5" filter="url(#node-glow)" class="node-animate node-delay-2s" />
+        <circle cx="600" cy="600" r="12" fill="url(#node-grad)" stroke-width="1.5" filter="url(#node-glow)" class="node-animate node-delay-1-5s" />
+        <circle cx="400" cy="400" r="16" fill="url(#node-grad)" stroke-width="2" filter="url(#node-glow)" class="node-pulse" />
       </svg>
     </div>
     <div class="hero-content">

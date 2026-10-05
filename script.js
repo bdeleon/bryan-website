@@ -54,6 +54,12 @@ function animateCounter(el) {
   const target = parseInt(el.getAttribute('data-target'), 10);
   if (isNaN(target)) return;
 
+  // Visitors who ask for reduced motion get the final number, not a count-up.
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    el.textContent = target;
+    return;
+  }
+
   const duration = 1200;
   const start = performance.now();
 
