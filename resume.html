@@ -39,7 +39,7 @@
       </div>
       <div class="skill-block">
         <div class="skill-label">Frameworks &amp; Tools</div>
-        <div class="skill-value">Django · Flask · Docker · Kubernetes · Terraform · Chef · PySpark · Stripe · Avalara · Segment · Klaviyo</div>
+        <div class="skill-value">Django · FastAPI · Flask · Docker · Kubernetes · ArgoCD · OpenTelemetry · Terraform · Chef · PySpark · Stripe · Avalara · Segment · Klaviyo</div>
       </div>
       <div class="skill-block">
         <div class="skill-label">Cloud / AWS</div>
@@ -47,7 +47,7 @@
       </div>
       <div class="skill-block">
         <div class="skill-label">Practices</div>
-        <div class="skill-value">REST APIs · TDD · CI/CD · Agile/Scrum · OOP</div>
+        <div class="skill-value">REST APIs · OAuth · TDD · CI/CD · AI-assisted development with test-first discipline · Agile/Scrum · OOP</div>
       </div>
       <div class="skill-block">
         <div class="skill-label">Human Languages</div>
@@ -97,12 +97,14 @@
         </div>
         <ul>
           <li>Owned a large-scale architectural refactor to decouple the core cart system, reducing technical debt and preserving critical business logic with minimal oversight.</li>
+          <li>Designed the OAuth boundary between the core Django platform and the LLM chat service (FastAPI / pydantic-ai): token introspection that resolves customers without exposing PII, a client-credentials service identity, and a token-authenticated chat API that derives identity from the verified token — rolled out across environments via ArgoCD.</li>
+          <li>Owned OpenTelemetry tracing for the platform: fixed Django instrumentation so request spans emit, added per-user trace lookup, and wired spanmetrics exemplars so dashboard panels click through to Tempo traces.</li>
           <li>Designed and built a store credit service integrated across purchase order confirmation, subscription reauthorization, and tax recalculation.</li>
           <li>Diagnosed and resolved a series of critical issues in the flex pay installment system — including auth-fail recovery flows, subscription state remediation, and store credit application across multi-payment sequences.</li>
+          <li>Ship internal admin features end-to-end — Django API plus the JavaScript admin UI — for pricing overrides, fulfillment obligations, and box editing.</li>
           <li>Redesigned the Stripe integration for improved scalability, adding Apple Pay and Google Pay support.</li>
           <li>Built proactive health monitoring alerts for out-of-stock inventory, overdue subscriptions, and cart anomalies — surfacing issues before they reached production.</li>
-          <li>Maintained and extended integrations with Avalara (tax), Klaviyo (email), Segment (analytics), UPS (shipping), and Amazon (soil test acquisition channel).</li>
-          <li>Managed recurring Django LTS upgrades, keeping the platform current with each new long-term support release.</li>
+          <li>Maintain integrations with Avalara, Klaviyo, Segment, UPS, and Amazon; manage recurring Django LTS upgrades and CVE-driven dependency patching.</li>
         </ul>
       </div>
 
