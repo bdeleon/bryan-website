@@ -81,7 +81,7 @@ body {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--sidebar-accent);
-  border: 1px solid rgba(165,180,252,0.32);
+  border: 1px solid rgba(201, 169, 97, 0.32);
   border-radius: 20px;
   padding: 2px 9px;
   margin-top: 9px;
@@ -95,7 +95,7 @@ body {
   text-transform: uppercase;
   color: var(--sidebar-accent);
   padding-bottom: 7px;
-  border-bottom: 1px solid var(--navy-border);
+  border-bottom: 1px solid var(--sidebar-border);
   margin-bottom: 12px;
 }
 
